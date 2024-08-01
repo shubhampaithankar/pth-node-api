@@ -1,6 +1,7 @@
-import * as lodash from 'lodash'
-
+import lodash from 'lodash'
 import User from '../models/user.model.js'
+
+const { omit } = lodash
 
 export const GetUser = async (req, res) => {
     try {
@@ -19,7 +20,7 @@ export const GetUser = async (req, res) => {
         res.status(200).send({
             ack: 1,
             pokemon: user.pokemon,
-            user: lodash.omit(user.toJSON(), ['password', '__v'])
+            user: omit(user.toJSON(), ['password', '__v'])
         })
     
     } catch (err) {
@@ -28,6 +29,10 @@ export const GetUser = async (req, res) => {
             error: err.message
         })
     }
+}
+
+export const GetPokemon = async (req, res) => {
+    
 }
 
 export const GetAllPokemon = async (req, res) => {
