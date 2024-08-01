@@ -10,7 +10,7 @@ app.use(express.json())
 app.use(cors())
 
 mongoose.connect(process.env.MONGO_URL)
-    .then(() => console.log(`connected to mongo database: ${connection.connection.db.databaseName}`))
+    .then((connection) => console.log(`connected to mongo database: ${connection.connection.db.databaseName}`))
     .catch(err => console.log(`mongoose connection error ${err}`))
 
 
