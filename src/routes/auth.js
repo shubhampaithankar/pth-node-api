@@ -1,7 +1,7 @@
 import { Router } from 'express'
-const router = Router()
-
 import { LoginUser, RegisterUser } from '../controllers/auth.controller.js'
+
+const router = Router()
 
 router.post('/login', LoginUser)
 
