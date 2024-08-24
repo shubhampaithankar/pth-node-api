@@ -1,16 +1,13 @@
 import lodash from 'lodash'
 import Pokedex from 'pokedex-promise-v2';
 
+const { slice, shuffle } = lodash
 
 const options = {
     cacheLimit: 100 * 1000, // 100s
     timeout: 5 * 1000 // 5s
 }
 const P = new Pokedex(options)
-
-const { slice, shuffle } = lodash
-
-
 
 export const GetRandomPokemon = async (req, res) => {
     try {
@@ -48,21 +45,14 @@ export const GetRandomPokemon = async (req, res) => {
     }
 }
 
-export const GetGenerationPokemon = async (req, res) => {
+export const GetGenerationalPokemon = async (req, res) => {
     try {
         const { generation } = req.body
-
-        // https://pokeapi.co/api/v2/generation/{id or name}/
-        const response = await fetch(`${POKE_API}/generation/${generation}`, {
-            method: 'GET'
-        })
-
-        const { pokemon_species } = await response.json()
-        // const modifiedArray = slice(shuffle(pokemon_species), 0, 9) 
+        const { pokemon_species } = await P.getGenerationByName(generation)
 
         res.status(200).send({
             ack: 1,
-            results: pokemon_species
+            result: pokemon_species
         })
 
     } catch (err) {
