@@ -18,8 +18,6 @@ export const GetRandomPokemon = async (req, res) => {
             return id
         })
 
-        console.log(pokemons)
-
         P.getPokemonByName(pokemons, (response, err) => {
             if (err) throw err
             const result = response.map(pokemon => ({
@@ -53,6 +51,24 @@ export const GetGenerationalPokemon = async (req, res) => {
         res.status(200).send({
             ack: 1,
             result: pokemon_species
+        })
+
+    } catch (err) {
+        res.status(500).send({
+            ack: 3,
+            error: err.message
+        })
+    }
+}
+
+export const GetPokemonDetails = async (req, res) => {
+    try {
+        const { id } = req.body
+        const pokemon = await P.getPokemonByName(id)
+
+        res.status(200).send({
+            ack: 1,
+            result: pokemon
         })
 
     } catch (err) {
