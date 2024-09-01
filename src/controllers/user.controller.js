@@ -14,7 +14,7 @@ export const GetUser = async (req, res) => {
     
         if (!user) return res.status(406).send({
             ack: 0,
-            msg: 'User not found'
+            error: 'User not found'
         })
     
         res.status(200).send({
@@ -46,7 +46,7 @@ export const GetAllPokemon = async (req, res) => {
 
         if (!user) return res.status(406).send({
             ack: 0,
-            msg: 'User not found'
+            error: 'User not found'
         })
 
         res.status(200).send({
@@ -73,7 +73,7 @@ export const AddPokemonToUser = async (req, res) => {
 
         if (!user) return res.status(406).send({
             ack: 0,
-            msg: 'User not found'
+            error: 'User not found'
         })
 
         if (!user.pokemon.includes(pokemon)) { 
@@ -91,7 +91,7 @@ export const AddPokemonToUser = async (req, res) => {
 
             res.status(406).send({
                 ack: 0,
-                msg: 'User already has this pokemon'
+                error: 'User already has this pokemon'
             })
 
         }
@@ -115,7 +115,7 @@ export const DeletePokemonFromUser = async (req, res) => {
 
         if (!user) return res.status(406).send({
             ack: 0,
-            msg: 'User not found'
+            error: 'User not found'
         })
 
         if (user.pokemon.includes(pokemon)) { 
@@ -133,7 +133,7 @@ export const DeletePokemonFromUser = async (req, res) => {
 
             res.status(406).send({
                 ack: 0,
-                msg: 'User doesnt have this pokemon'
+                error: 'User doesnt have this pokemon'
             })
 
         }
