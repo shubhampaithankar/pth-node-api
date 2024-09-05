@@ -1,8 +1,6 @@
 import lodash from 'lodash'
 import User from '../models/user.model.js'
 
-const { omit } = lodash
-
 export const GetUser = async (req, res) => {
     try {
             
@@ -10,7 +8,7 @@ export const GetUser = async (req, res) => {
         
         const user = await User.findOne({
             _id: user_id
-        })
+        }).select('-password')
     
         if (!user) return res.status(406).send({
             ack: 0,
@@ -19,8 +17,7 @@ export const GetUser = async (req, res) => {
     
         res.status(200).send({
             ack: 1,
-            pokemon: user.pokemon,
-            user: omit(user.toJSON(), ['password', '__v'])
+            user: user
         })
     
     } catch (err) {
