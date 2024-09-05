@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import { config } from 'dotenv'
 
 import app from './src/app.js'
-import io from './src/socketio.js'
+import io from './src/socket.js'
 
 config()
 
