@@ -1,5 +1,12 @@
-import lodash from 'lodash'
 import User from '../models/user.model.js'
+
+import Pokedex from 'pokedex-promise-v2';
+
+const options = {
+    cacheLimit: 100 * 1000, // 100s
+    timeout: 5 * 1000 // 5s
+}
+const P = new Pokedex(options)
 
 export const GetUser = async (req, res) => {
     try {
@@ -62,11 +69,13 @@ export const GetAllPokemon = async (req, res) => {
 export const AddPokemonToUser = async (req, res) => {
     try {
 
-        const { user_id, pokemon } = req.body
+        const { user_id, id } = req.body
         
         const user = await User.findOne({
             _id: user_id
         })
+
+        const pokemon = await P.getPokemonByName(id)
 
         if (!user) return res.status(406).send({
             ack: 0,
