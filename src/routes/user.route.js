@@ -5,10 +5,10 @@ const router = Router()
 
 router.post('/get', GetUser)
 
-router.post('/pokemon/get-all', GetAllPokemon)
+router.post('/get-all-pokemon', GetAllPokemon)
 
-router.post('/pokemon/add', AddPokemonToUser)
+router.post('/add-pokemon', AddPokemonToUser)
 
-router.post('/pokemon/delete', DeletePokemonFromUser)
+router.post('/delete-pokemon', DeletePokemonFromUser)
 
 export default router
